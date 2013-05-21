@@ -1,6 +1,6 @@
 ## 单元测试 Unit Testing
   
-  * 利于重构
+  * 利于重构 dao.jdbc  dao.ibatis  dao.hibernate
   * 基于接口测试
   * 保证质量
 
