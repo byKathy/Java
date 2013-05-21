@@ -1,4 +1,8 @@
 ## 单元测试 Unit Testing
+  
+  * 利于重构
+  * 基于接口测试
+  * 保证质量
 
 ## 集成测试 Integration Testing
 
