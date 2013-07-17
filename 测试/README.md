@@ -19,9 +19,30 @@
 
 用户验收测试 User Acceptance Testing
 ------------------------
+Acceptance testing is testing performed by users 
+interacting with the interface of the application. It is a manual kind of testing that 
+is performed whenever a piece of the software  is implemented. It is a good thing to 
+perform acceptance testing frequently and as early as possible; however, unit and 
+integration tests should locate most of the issues before they ever reach the users. 
+So acceptance testing should not be seen as a replacement for unit and 
+integration testing.
 
 性能测试 Performance Testing
 ------------------------
+Ideally performed on as close as possible a mirror of the 
+production setup where the application will finally be deployed. By  setup we mean 
+everything—the hard- and software, but also the dependencies such as the 
+databases (including data), external services, and so forth. Performance tests aim 
+at detecting what the throughput of the application will be under normal load. For 
+web applications it can be the average response time of requests with a predicted 
+user load. The results of performance te sting can verify whether the application 
+will be able to comply with the proposed Service Level Agreements (SLAs).  
 
 压力测试 Stress Testing
 ------------------------
+Ideally requires the same setup  as performance testing. However 
+here we are putting the application under an abnormal amount of load (or stress). 
+It aims at detecting weak spots such as transactions that start to break or other 
+failures that do not appear under normal operation. In general it gives an idea 
+about the stability and robustness of the entire setup when the borders of normal 
+load are crossed.
