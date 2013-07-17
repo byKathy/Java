@@ -6,14 +6,11 @@
 
 单元测试 Unit Testing
 ------------------------
-The basic definition of a unit test is “a discrete test condition to 
-check correctness of an isolated software module.” A unit test functions at the 
-lowest possible level of a software module,  preferably a single method of a class, 
-without having any dependencies (like resources). We will look into unit testing in 
-more detail in the next sub section. 
+单元测试的对象是软件测试中的最小单元：模块。通常是一个方法中的一个类。单元测试不需要依赖外部的资源，例如类、数据、文件系统等。
 
 集成测试 Integration Testing
 ------------------------
+相比单元测试，集成测试拥有更大的依赖范围，通常集成测试关联到应用程序的不同层次。二集成测试的作用就是对系统的接口及集成后的功能进行正确性的检测。
 
 系统测试 System Testing
 ------------------------
