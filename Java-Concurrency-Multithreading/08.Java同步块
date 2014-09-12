@@ -125,39 +125,37 @@ Java中的**同步实例方法是基于这个方法所属的实例对象上进�
 Here is an example that starts 2 threads and have both of them call the add method on the same instance of Counter. Only one thread at a time will be able to call the add method on the same instance, because the method is synchronized on the instance it belongs to.
 
 ```Java
-  public class Counter{
-     
-     long count = 0;
-    
-     public synchronized void add(long value){
-       this.count += value;
-     }
+public class Counter{
+   long count = 0;
+  
+   public synchronized void add(long value){
+     this.count += value;
+   }
+}
+public class CounterThread extends Thread{
+   protected Counter counter = null;
+
+   public CounterThread(Counter counter){
+      this.counter = counter;
+   }
+
+   public void run() {
+for(int i=0; i<10; i++){
+         counter.add(i);
+      }
+   }
+}
+public class Example {
+
+  public static void main(String[] args){
+    Counter counter = new Counter();
+    Thread  threadA = new CounterThread(counter);
+    Thread  threadB = new CounterThread(counter);
+
+    threadA.start();
+    threadB.start(); 
   }
-  public class CounterThread extends Thread{
-
-     protected Counter counter = null;
-
-     public CounterThread(Counter counter){
-        this.counter = counter;
-     }
-
-     public void run() {
-	for(int i=0; i<10; i++){
-           counter.add(i);
-        }
-     }
-  }
-  public class Example {
-
-    public static void main(String[] args){
-      Counter counter = new Counter();
-      Thread  threadA = new CounterThread(counter);
-      Thread  threadB = new CounterThread(counter);
-
-      threadA.start();
-      threadB.start(); 
-    }
-  }
+}
 ```
 
 Two threads are created. The same Counter instance is passed to both of them in their constructor. The Counter.add() method is synchronized on the instance, because the add method is an instance method, and marked as synchronized. Therefore only one of the threads can call the add() method at a time. The other thread will wait until the first thread leaves the add() method, before it can execute the method itself.
@@ -165,22 +163,22 @@ Two threads are created. The same Counter instance is passed to both of them in 
 If the two threads had referenced two separate Counter instances, there would have been no problems calling the add() methods simultaneously. The calls would have been to different objects, so the methods called would also be synchronized on different objects (the object owning the method). Therefore the calls would not block. Here is how that could look:
 
 ```Java
-  public class Example {
+public class Example {
+  public static void main(String[] args){
+    Counter counterA = new Counter();
+    Counter counterB = new Counter();
+    Thread  threadA = new CounterThread(counterA);
+    Thread  threadB = new CounterThread(counterB);
 
-    public static void main(String[] args){
-      Counter counterA = new Counter();
-      Counter counterB = new Counter();
-      Thread  threadA = new CounterThread(counterA);
-      Thread  threadB = new CounterThread(counterB);
-
-      threadA.start();
-      threadB.start(); 
-    }
+    threadA.start();
+    threadB.start(); 
   }
+}
 ```
 
 Notice how the two threads, threadA and threadB, no longer reference the same counter instance. The add method of counterA and counterB are synchronized on their two owning instances. Calling add() on counterA will thus not block a call to add() on counterB.
 
 ##Java Concurrency Utilities
 
-The synchronized mechanism was Java's first mechanism for synchronizing access to objects shared by multiple threads. The synchronized mechanism isn't very advanced though. That is why Java 5 got a whole set of concurrency utility classes to help developers implement more fine grained concurrency control than what you get with synchronized.
+`synchronized`机制是Java第一个引进的用于同步多线程资源共享的机制。然而`synchroniez`机制并不高效。这就是为什么Java 5提供了一整套的并发工具类，以帮助开发人员实现更细粒度的并发控制
+。
