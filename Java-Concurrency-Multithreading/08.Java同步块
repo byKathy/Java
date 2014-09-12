@@ -30,9 +30,7 @@ Java中的同步块使用关键字**synchronized**进行标记**。同步块在J
 
 使用**synchronized**关键字对方法进行声明，告诉JVM这是一个同步的方法。
 
-
-
-A synchronized instance method in Java is synchronized on the instance (object) owning the method. Thus, each instance has its synchronized methods synchronized on a different object: the owning instance. Only one thread can execute inside a synchronized instance method. If more than one instance exist, then one thread at a time can execute inside a synchronized instance method per instance. One thread per instance.
+Java中的同步实例方法是基于这个方法所属的实例对象上进行同步的。因此，每一个同步实例方法都是基于各自的实例对象进行同步的。同一时间，只有一个线程可以访问一个实例对象的同步实例方法。如果有多个实例存在，那么每个线程都可以同时访问各自不同实例对象的同步实例方法，一个实例对象对应一个线程。
 
 ##同步静态方法（Synchronized Static Methods）
 
