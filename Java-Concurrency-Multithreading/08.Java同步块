@@ -20,7 +20,7 @@ Java中的同步块使用关键字**synchronized**进行标记**。同步块在J
 
 ##同步实例方法（Synchronized Instance Methods）
 
-Here is a synchronized instance method:
+下面是一个同步的实例方法：
 
 ```Java
   public synchronized void add(int value){
@@ -28,7 +28,9 @@ Here is a synchronized instance method:
   }
 ```
 
-Notice the use of the synchronized keyword in the method declaration. This tells Java that the method is synchronized.
+使用**synchronized**关键字对方法进行声明，告诉JVM这是一个同步的方法。
+
+
 
 A synchronized instance method in Java is synchronized on the instance (object) owning the method. Thus, each instance has its synchronized methods synchronized on a different object: the owning instance. Only one thread can execute inside a synchronized instance method. If more than one instance exist, then one thread at a time can execute inside a synchronized instance method per instance. One thread per instance.
 
