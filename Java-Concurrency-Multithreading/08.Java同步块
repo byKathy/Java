@@ -30,11 +30,11 @@ Java中的同步块使用关键字**synchronized**进行标记**。同步块在J
 
 使用**synchronized**关键字对方法进行声明，告诉JVM这是一个同步的方法。
 
-Java中的同步实例方法是基于这个方法所属的实例对象上进行同步的。因此，每一个同步实例方法都是基于各自的实例对象进行同步的。同一时间，只有一个线程可以访问一个实例对象的同步实例方法。如果有多个实例存在，那么每个线程都可以同时访问各自不同实例对象的同步实例方法，一个实例对象对应一个线程。
+Java中的**同步实例方法是基于这个方法所属的实例对象上进行同步的**。因此，每一个同步实例方法都是基于各自的实例对象进行同步的。同一时间，只有一个线程可以访问一个实例对象的同步实例方法。如果有多个实例存在，那么每个线程都可以同时访问各自不同实例对象的同步实例方法，一个实例对象对应一个线程。
 
 ##同步静态方法（Synchronized Static Methods）
 
-Static methods are marked as synchronized just like instance methods using the synchronized keyword. Here is a Java synchronized static method example:
+静态方法的同步与实例方法一致，都是使用**synchronized**在方法放进行声明。
 
 ```Java
   public static synchronized void add(int value){
@@ -42,17 +42,17 @@ Static methods are marked as synchronized just like instance methods using the s
   }
 ```
 
-Also here the synchronized keyword tells Java that the method is synchronized.
+同样的，这里的**synchronized**关键字用于告诉JVM这个静态方法是同步的。
 
-Synchronized static methods are synchronized on the class object of the class the synchronized static method belongs to. Since only one class object exists in the Java VM per class, only one thread can execute inside a static synchronized method in the same class.
+**同步静态方法是基于这个静态方法所属的类对象进行同步的**。由于在JVM中，每个类有且只有一个类对象，因此，在同一时间内，只有一个线程能够访问同一个类的同步静态方法。
 
-If the static synchronized methods are located in different classes, then one thread can execute inside the static synchronized methods of each class. One thread per class regardless of which static synchronized method it calls.
+如果同步静态方法位于不同的类中，那么每个线程都可以访问各自对应的类的同步静态方法，一个线程对应一个类。
 
 ##实例方法中的同步块（Synchronized Blocks in Instance Methods）
 
-You do not have to synchronize a whole method. Sometimes it is preferable to synchronize only part of a method. Java synchronized blocks inside methods makes this possible.
+有些时候，你并不需要同步整一个方法，而只需要同步这个方法下的一小部分代码块。你可以在方法里面使用同步代码块。
 
-Here is a synchronized block of Java code inside an unsynchronized Java method:
+下面这个例子就是在非同步方法里面使用了同步代码块：
 
 ```Java
   public void add(int value){
@@ -63,11 +63,11 @@ Here is a synchronized block of Java code inside an unsynchronized Java method:
   }
 ```
 
-This example uses the Java synchronized block construct to mark a block of code as synchronized. This code will now execute as if it was a synchronized method.
+这个例子里，用了Java的同步代码块来使代码进行同步，让这个方法像同步方法一样执行。
 
-Notice how the Java synchronized block construct takes an object in parentheses. In the example "this" is used, which is the instance the add method is called on. The object taken in the parentheses by the synchronized construct is called a monitor object. The code is said to be synchronized on the monitor object. A synchronized instance method uses the object it belongs to as monitor object.
+注意在Java的同步代码块里，需要在括号里传递一个对象。这个例子中，这个对象是**this**，this指的是这个实例对象本身。在Java同步代码块括号中的对象称为**监听器对象**。意味着，这个同步块是基于这个监听器对象进行同步的。同步实例方法使用其所在实例对象作为监听器对象。
 
-Only one thread can execute inside a Java code block synchronized on the same monitor object.
+**同一时间，只有一个线程能够访问基于同一个监听器对象的同步代码块。**
 
 The following two examples are both synchronized on the instance they are called on. They are therefore equivalent with respect to synchronization:
 
